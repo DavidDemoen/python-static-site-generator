@@ -1,1 +1,1 @@
-# python-status-site-generator
+# python-static-site-generator
