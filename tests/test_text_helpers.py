@@ -101,7 +101,7 @@ class TestTextToTextNodes(unittest.TestCase):
         self.assertEqual(nodes[1].text_type, TextType.BOLD)
 
     def test_italic_text(self):
-        text = "This is *italic* text."
+        text = "This is _italic_ text."
         nodes = text_to_textnodes(text)
         self.assertEqual(len(nodes), 3)
         self.assertEqual(nodes[1].text, "italic")

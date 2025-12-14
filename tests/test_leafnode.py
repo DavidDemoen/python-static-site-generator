@@ -5,7 +5,7 @@ from src.leafnode import LeafNode
 class TestLeafNode(unittest.TestCase):
     def test_leafnode_basic_tag_and_value(self):
         node = LeafNode("span", "Hello")
-        expected_html = '<span>"Hello"</span>'
+        expected_html = '<span>Hello</span>'
         self.assertEqual(node.to_html(), expected_html)
 
     def test_leafnode_value_none_raises(self):
@@ -20,17 +20,17 @@ class TestLeafNode(unittest.TestCase):
 
     def test_leafnode_with_props_no_href(self):
         node = LeafNode("div", "Content", props={"class": "my-class", "id": "main"})
-        expected_html = '<div class="my-class" id="main">"Content"</div>'
+        expected_html = '<div class="my-class" id="main">Content</div>'
         self.assertEqual(node.to_html(), expected_html)
 
     def test_leafnode_with_href_prop(self):
         node = LeafNode("a", "Click me", props={"href": "http://example.com"})
-        expected_html = '<a href="http://example.com">"Click me"</a>'
+        expected_html = '<a href="http://example.com">Click me</a>'
         self.assertEqual(node.to_html(), expected_html)
 
     def test_leafnode_value_empty_string(self):
         node = LeafNode("span", "")
-        self.assertEqual(node.to_html(), '<span>""</span>')
+        self.assertEqual(node.to_html(), '<span></span>')
 
     def test_leafnode_tag_empty_string(self):
         node = LeafNode("", "Text")
@@ -38,7 +38,7 @@ class TestLeafNode(unittest.TestCase):
 
     def test_leafnode_props_with_special_characters(self):
         node = LeafNode("button", "Click", props={"data-action": "save:1"})
-        expected_html = '<button data-action="save:1">"Click"</button>'
+        expected_html = '<button data-action="save:1">Click</button>'
         self.assertEqual(node.to_html(), expected_html)
 
     def test_leafnode_repr(self):

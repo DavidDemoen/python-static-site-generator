@@ -13,7 +13,7 @@ class TestParentNode(unittest.TestCase):
         node = ParentNode("div", [LeafNode("span", "Hello")])
         self.assertEqual(
             node.to_html(),
-            '<div><span>"Hello"</span></div>'
+            '<div><span>Hello</span></div>'
         )
 
     def test_parent_to_html_multiple_children(self):
@@ -27,7 +27,7 @@ class TestParentNode(unittest.TestCase):
         )
         self.assertEqual(
             node.to_html(),
-            '<p><b>"Bold"</b> text <i>"Italic"</i></p>'
+            '<p><b>Bold</b> text <i>Italic</i></p>'
         )
 
     def test_nested_parent_nodes(self):
@@ -66,8 +66,8 @@ class TestParentNode(unittest.TestCase):
         self.assertEqual(
             div_node.to_html(),
             '<div>'
-            '<p><b>"Bold text"</b>Normal text<i>"italic text"</i>Normal text</p>'
-            '<p><b>"Bold text"</b>Normal text<i>"italic text"</i>Normal text</p>'
+            '<p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p>'
+            '<p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p>'
             '</div>'
         )
 
@@ -136,7 +136,7 @@ class TestParentNode(unittest.TestCase):
         # ParentNode does not render props
         self.assertEqual(
             node.to_html(),
-            '<div><span>"Hi"</span></div>'
+            '<div><span>Hi</span></div>'
         )
 
     # ---------- DEEP NESTING ----------
@@ -159,7 +159,7 @@ class TestParentNode(unittest.TestCase):
 
         self.assertEqual(
             node.to_html(),
-            '<div><section><p><b>"Deep"</b></p></section></div>'
+            '<div><section><p><b>Deep</b></p></section></div>'
         )
 
 
