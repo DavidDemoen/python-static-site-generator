@@ -1,6 +1,6 @@
 import unittest
 
-from src.block_helpers import markdown_to_blocks
+from src.block_helpers import markdown_to_blocks, block_to_block_type, BlockType
 
 class TestMarkdownToBlocks(unittest.TestCase):
     def test_single_block(self):
@@ -130,6 +130,48 @@ class TestMarkdownToBlocks(unittest.TestCase):
             markdown_to_blocks(rebuilt),
             blocks
         )
+
+class TestBlockToBlockType(unittest.TestCase):
+    
+    def test_heading(self):
+        for i in range(1, 7):
+            block = "#"*i + " Heading"
+            self.assertEqual(block_to_block_type(block), BlockType.HEADING)
+
+    def test_code_block(self):
+        block = "```\nprint('Hello')\n```"
+        self.assertEqual(block_to_block_type(block), BlockType.CODE)
+
+    def test_quote_block(self):
+        block = "> Quote line 1\n> Quote line 2"
+        self.assertEqual(block_to_block_type(block), BlockType.QUOTE)
+
+    def test_unordered_list(self):
+        block = "- item 1\n- item 2\n- item 3"
+        self.assertEqual(block_to_block_type(block), BlockType.UNORDERED_LIST)
+
+    def test_ordered_list(self):
+        block = "1. item 1\n2. item 2\n3. item 3"
+        self.assertEqual(block_to_block_type(block), BlockType.ORDERED_LIST)
+
+    def test_ordered_list_non_incrementing(self):
+        block = "1. item 1\n2. item 2\n4. item 3"
+        self.assertEqual(block_to_block_type(block), BlockType.PARAGRAPH)
+
+    def test_paragraph(self):
+        block = "This is a normal paragraph.\nIt has multiple lines."
+        self.assertEqual(block_to_block_type(block), BlockType.PARAGRAPH)
+
+    def test_empty_block(self):
+        self.assertEqual(block_to_block_type(""), BlockType.PARAGRAPH)
+
+    def test_mixed_quote_and_text(self):
+        block = "> Quote\nNot a quote"
+        self.assertEqual(block_to_block_type(block), BlockType.PARAGRAPH)
+
+    def test_mixed_list_and_text(self):
+        block = "- item 1\nitem 2"
+        self.assertEqual(block_to_block_type(block), BlockType.PARAGRAPH)
 
 
 if __name__ == "__main__":
