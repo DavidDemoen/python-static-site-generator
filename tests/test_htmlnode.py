@@ -50,7 +50,7 @@ class TestHTMLNode(unittest.TestCase):
         node = HTMLNode("p", "Hello", None, {"class": "text"})
         self.assertEqual(
             repr(node),
-            "p, Hello, None, {'class': 'text'}"
+            "HTMLNode: p, Hello, None, {'class': 'text'}"
         )
 
     def test_to_html_not_implemented(self):
